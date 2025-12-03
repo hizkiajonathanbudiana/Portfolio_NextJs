@@ -15,15 +15,15 @@ export async function generateMetadata() {
       default: siteName,
       template: `%s | ${siteName}`, // Hasil: "About | HIZKIA.WZ"
     },
-    description: 'Interaction Designer & Developer Portfolio',
+    description: "ItsWei — web portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
     icons: {
       icon: '/favicon.ico',
     },
     // OpenGraph untuk Share Link (WA/Twitter/FB)
     openGraph: {
       title: siteName,
-      description: 'Interaction Designer Portfolio',
-      url: 'https://hizkiaweize.com', // Ganti dengan domain aslimu nanti
+      description: "ItsWei — web portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
+      url: 'https://portfolio.itswei.com', // Ganti dengan domain aslimu nanti
       siteName: siteName,
       locale: 'en_US',
       type: 'website',
