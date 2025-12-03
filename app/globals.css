@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --foreground-rgb: 10, 10, 10;
+  --background-rgb: 245, 245, 245;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: 'Courier New', monospace;
+  overflow-x: hidden;
+}
+
+.brutal-border {
+  border: 3px solid #0a0a0a;
+}
+
+.brutal-shadow {
+  box-shadow: 4px 4px 0px 0px #0a0a0a;
+}
+
+.brutal-shadow-hover:hover {
+  box-shadow: 2px 2px 0px 0px #0a0a0a;
+  transform: translate(2px, 2px);
+}
+
+.brutal-text-outline {
+  -webkit-text-stroke: 1px #0a0a0a;
+  color: transparent;
+}
+
+canvas {
+  touch-action: none;
+}
