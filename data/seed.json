@@ -1,0 +1,94 @@
+{
+  "pages": [
+    {
+      "page": "home",
+      "heading": "INTERACTION<br/>DESIGNER",
+      "subHeading": "INTERACTION / DEV",
+      "cornerTopLeft": "PORTFOLIO ©2025",
+      "cornerTopRight": "AVAILABLE FOR WORK\nTAIPEI, TAIWAN",
+      "cornerBottomLeft": "COORDINATES\n25.0330° N, 121.5654° E",
+      "cornerBottomRight": "HIZKIA.WZ\nINDEX_OF_WORKS",
+      "scrollText": "(SCROLL TO ENTER) ↓"
+    },
+    {
+      "page": "experiments",
+      "heading": "SELECTED<br/>WORKS",
+      "subHeading": "INTERACTION / DEV",
+      "metaText": "TAP ROW TO EXPAND [+].",
+      "cornerTopRight": "DATABASE ENTRIES: DYNAMIC"
+    },
+    {
+      "page": "cv",
+      "heading": "CURRICULUM<br/>VITAE",
+      "subHeading": "Hizkia Weize — Interaction Designer",
+      "lastUpdated": "Dynamic Data Source"
+    },
+    {
+      "page": "contact",
+      "heading": "LET'S START<br/>A PROJECT.",
+      "subHeading": "GMT+8 TAIPEI"
+    },
+    {
+      "page": "about",
+      "heading": "HELLO, I'M<br/>HIZKIA WEIZE."
+    }
+  ],
+  "resume": {
+    "bio": "I am an Interaction Designer and Digital Craftsman currently based in Taipei, Taiwan. My work exists at the intersection of raw brutality and functional aesthetics.",
+    "email": "hizkia.weize@gmail.com",
+    "phone": "Taipei, TW",
+    "socials": [
+      { "platform": "Instagram", "url": "#" },
+      { "platform": "LinkedIn", "url": "#" }
+    ],
+    "downloads": [
+      { "label": "Download English PDF", "url": "/cv-en.pdf" },
+      { "label": "Download Mandarin PDF", "url": "/cv-zh.pdf" }
+    ],
+    "sections": [
+      {
+        "title": "Education",
+        "type": "Education",
+        "items": [
+          {
+            "title": "Bachelor of Interaction Design",
+            "subtitle": "National Taipei University of Tech",
+            "date": "2021 — 2025",
+            "description": "Majoring in Interaction Design."
+          }
+        ]
+      },
+      {
+        "title": "Selected Experience",
+        "type": "Experience",
+        "items": [
+          {
+            "title": "Interaction Designer",
+            "subtitle": "Freelance",
+            "date": "2023 — Present",
+            "description": "Designing and developing web interfaces."
+          }
+        ]
+      },
+      {
+        "title": "Technical Stack",
+        "type": "Skills",
+        "items": [
+          { "title": "Next.js / React" },
+          { "title": "Three.js / WebGL" },
+          { "title": "Tailwind CSS" }
+        ]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "title": "NEURAL_INTERFACE",
+      "slug": "neural-interface",
+      "category": "WEBGL",
+      "year": "2024",
+      "image": "https://placehold.co/800x400/111/FFF/png?text=NEURAL",
+      "description": "Exploring depth and motion."
+    }
+  ]
+}

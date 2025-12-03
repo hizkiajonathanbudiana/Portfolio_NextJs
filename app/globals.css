@@ -1,35 +1,38 @@
 @import "tailwindcss";
-
-:root {
-  --foreground-rgb: 10, 10, 10;
-  --background-rgb: 245, 245, 245;
-}
-
+/* === GLOBAL SETTINGS: MODERN BRUTALISM === */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  background-color: #f0f0f0;
+  color: #111111;
   font-family: 'Courier New', monospace;
   overflow-x: hidden;
 }
 
+/* === UTILITIES === */
 .brutal-border {
-  border: 3px solid #0a0a0a;
+  border: 1px solid #111; 
 }
 
-.brutal-shadow {
-  box-shadow: 4px 4px 0px 0px #0a0a0a;
+.hairline {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.brutal-shadow-hover:hover {
-  box-shadow: 2px 2px 0px 0px #0a0a0a;
-  transform: translate(2px, 2px);
+@keyframes loading {
+  0% { transform: scaleX(0); }
+  50% { transform: scaleX(0.7); }
+  100% { transform: scaleX(1); }
 }
 
-.brutal-text-outline {
-  -webkit-text-stroke: 1px #0a0a0a;
-  color: transparent;
+@keyframes fadeInUpBrutal {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-canvas {
-  touch-action: none;
+.animate-brutal-enter {
+  animation: fadeInUpBrutal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
+
+.delay-200 { animation-delay: 0.2s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* HAPUS BAGIAN CURSOR NONE DI BAWAH SINI */
