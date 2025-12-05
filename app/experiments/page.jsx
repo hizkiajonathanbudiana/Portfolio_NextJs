@@ -59,3 +59,11 @@ export default async function Experiments() {
     </main>
   );
 }
+
+export async function generateMetadata() {
+  return {
+    title: "Experiments · ITSWEI",
+    description:
+      "Experiments page — Portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
+  };
+}

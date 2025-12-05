@@ -1,37 +1,41 @@
-import Providers from '../components/Providers';
-import ConditionalNavbar from '../components/ConditionalNavbar';
-import './globals.css';
-import { getSettings } from '../lib/data';
+import Providers from "../components/Providers";
+import ConditionalNavbar from "../components/ConditionalNavbar";
+import "./globals.css";
+import { getSettings } from "../lib/data";
 
-// --- FITUR 1: DYNAMIC METADATA (SEO) ---
-// Fungsi ini dijalankan Next.js sebelum render untuk set <title> dan <meta>
 export async function generateMetadata() {
   const settings = await getSettings();
 
-  const siteName = settings?.siteName || 'HIZKIA.WZ';
+  const siteName = "ITSWEI";
 
   return {
     title: {
       default: siteName,
-      template: `%s | ${siteName}`, // Hasil: "About | HIZKIA.WZ"
+      template: `%s · ${siteName}`,
     },
-    description: "ItsWei — web portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
+    description:
+      "ITSWEI — Portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
     icons: {
-      icon: '/favicon.ico',
+      icon: "/favicon.ico",
     },
-    // OpenGraph untuk Share Link (WA/Twitter/FB)
     openGraph: {
       title: siteName,
-      description: "ItsWei — web portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
-      url: 'https://portfolio.itswei.com', // Ganti dengan domain aslimu nanti
+      description:
+        "ITSWEI — Portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
+      url: "https://portfolio.itswei.com",
       siteName: siteName,
-      locale: 'en_US',
-      type: 'website',
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteName,
+      description:
+        "ITSWEI — Portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
     },
   };
 }
 
-// Revalidate data setiap 60 detik
 export const revalidate = 60;
 
 export default async function RootLayout({ children }) {
@@ -41,14 +45,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className="antialiased bg-[#f0f0f0] text-[#111]">
         <Providers>
-
-          {/* FITUR 3: NAVBAR HILANG DI CMS */}
-          {/* Logic sembunyi ada di dalam component ini */}
-          <ConditionalNavbar
-            siteName={settings.siteName}
-            links={settings.navbarLinks}
-          />
-
+          <ConditionalNavbar siteName="ITSWEI" links={settings.navbarLinks} />
           {children}
         </Providers>
       </body>

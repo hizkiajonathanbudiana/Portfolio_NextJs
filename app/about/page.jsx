@@ -4,6 +4,14 @@ import { getAbout } from "../../lib/data"; // Fetcher baru
 
 export const revalidate = 60;
 
+export async function generateMetadata() {
+  return {
+    title: "About · ITSWEI",
+    description:
+      "About page — Portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
+  };
+}
+
 export default async function About() {
   const about = await getAbout();
 

@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { getContact } from "../../lib/data";
 
-export const revalidate = 0; // Biar update CMS langsung kelihat
+export const revalidate = 60; // Biar update CMS langsung kelihat
+
+export async function generateMetadata() {
+  return {
+    title: "Contact · ITSWEI",
+    description:
+      "Contact page — Portfolio of Chen Weize (陳偉澤) / Hizkia Jonathan Budiana.",
+  };
+}
 
 export default async function Contact() {
   const contact = await getContact();
