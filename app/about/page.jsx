@@ -8,7 +8,7 @@ export default async function About() {
   const about = await getAbout();
 
   return (
-    <main className="min-h-screen pt-32 px-4 md:px-12 pb-12 bg-[#f0f0f0] text-[#111]">
+    <main className="min-h-screen pt-18 px-4 md:px-12 pb-12 bg-[#f0f0f0] text-[#111]">
       {/* === TOP SECTION: PHOTO & BIO === */}
       <section className="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-black/10 pb-16 mb-16">
         {/* KOLOM 1: FOTO */}
