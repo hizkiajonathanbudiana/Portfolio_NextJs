@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function CMSProjects() {
   const [projects, setProjects] = useState([]);
@@ -509,14 +510,15 @@ export default function CMSProjects() {
                       key={idx}
                       className="flex gap-2 bg-black p-2 border border-[#333] items-center group"
                     >
-                      <div className="w-12 h-12 bg-[#222] flex-shrink-0 relative overflow-hidden border border-white/10">
+                      <div className="w-12 h-12 bg-[#222] shrink-0 relative overflow-hidden border border-white/10">
                         {item.type === "video" ? (
                           <div className="w-full h-full flex items-center justify-center text-[8px] text-gray-500 bg-black">
                             VID
                           </div>
                         ) : (
-                          <img
+                          <Image
                             src={item.url}
+                            alt="Preview"
                             className="w-full h-full object-cover"
                             onError={(e) => {
                               e.target.src =
@@ -598,7 +600,7 @@ export default function CMSProjects() {
                       key={idx}
                       className="flex gap-2 items-center bg-black p-1 border border-[#333]"
                     >
-                      <div className="flex flex-col gap-[1px]">
+                      <div className="flex flex-col gap-px">
                         <button
                           type="button"
                           onClick={() => moveLink(idx, "up")}
@@ -684,9 +686,9 @@ export default function CMSProjects() {
                   <h3 className="font-bold text-sm text-white">{p.title}</h3>
                   <div className="flex gap-2 text-[10px] text-gray-500 font-mono mt-1">
                     <span>{p.category}</span>
-                    <span>//</span>
+                    <span>{`//`}</span>
                     <span>{p.year}</span>
-                    <span>//</span>
+                    <span>{`//`}</span>
                     <span>{(p.media || []).length} Media</span>
                   </div>
                 </div>
