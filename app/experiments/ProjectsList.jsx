@@ -1,93 +1,398 @@
-'use client';
+// "use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+// import { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// export default function ProjectsList({ projects }) {
+//   const [expandedId, setExpandedId] = useState(null);
+//   const [currentSlide, setCurrentSlide] = useState(0);
+
+//   const toggleProject = (id) => {
+//     if (expandedId === id) {
+//       setExpandedId(null);
+//     } else {
+//       setExpandedId(id);
+//       setCurrentSlide(0);
+//     }
+//   };
+
+//   const nextSlide = (e, length) => {
+//     e.stopPropagation();
+//     setCurrentSlide((prev) => (prev === length - 1 ? 0 : prev + 1));
+//   };
+
+//   const prevSlide = (e, length) => {
+//     e.stopPropagation();
+//     setCurrentSlide((prev) => (prev === 0 ? length - 1 : prev - 1));
+//   };
+
+//   if (!projects || projects.length === 0) {
+//     return (
+//       <div className="py-20 text-center font-mono text-gray-400 border-t border-black/10">
+//         NO PROJECTS FOUND.
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="flex flex-col border-t border-black/10">
+//       {projects.map((project, index) => {
+//         // Fallback Media Logic
+//         const mediaList =
+//           project.media && project.media.length > 0
+//             ? project.media
+//             : project.image
+//             ? [{ url: project.image, type: "image" }]
+//             : [];
+
+//         const linksList = project.links || [];
+//         const currentMedia = mediaList[currentSlide];
+
+//         return (
+//           <div key={project._id} className="border-b border-black/10">
+//             {/* 1. HEADER ROW (Tetap dipertahankan untuk Navigasi Cepat) */}
+//             <div
+//               onClick={() => toggleProject(project._id)}
+//               className={`
+//                                 group grid grid-cols-12 py-6 items-baseline cursor-pointer transition-all px-2 select-none
+//                                 ${
+//                                   expandedId === project._id
+//                                     ? "bg-gray-50 text-black"
+//                                     : "hover:bg-gray-50"
+//                                 }
+//                             `}
+//             >
+//               <div className="col-span-2 md:col-span-1 font-mono text-xs opacity-50">
+//                 {expandedId === project._id ? "[-]" : `0${index + 1}`}
+//               </div>
+//               <div className="col-span-8 md:col-span-8 text-xl md:text-5xl font-medium tracking-tight uppercase truncate pr-4">
+//                 {project.title}
+//               </div>
+//               <div className="col-span-2 md:col-span-3 text-right font-mono text-xs opacity-50 flex flex-col md:flex-row justify-end gap-2">
+//                 <span className="hidden md:inline">{project.category}</span>
+//                 <span className="hidden md:inline">—</span>
+//                 <span>{project.year}</span>
+//               </div>
+//             </div>
+
+//             {/* 2. EXPANDED CONTENT (White Background) */}
+//             <AnimatePresence>
+//               {expandedId === project._id && (
+//                 <motion.div
+//                   initial={{ height: 0, opacity: 0 }}
+//                   animate={{ height: "auto", opacity: 1 }}
+//                   exit={{ height: 0, opacity: 0 }}
+//                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+//                   className="overflow-hidden bg-white"
+//                 >
+//                   <div className="p-4 md:p-8 lg:p-12 border-t border-black/5">
+//                     <div className="max-w-4xl mx-auto flex flex-col gap-8">
+//                       {/* A. MEDIA CAROUSEL (Center Stage) */}
+//                       <div className="w-full">
+//                         {mediaList.length > 0 ? (
+//                           <div className="relative w-full aspect-video md:h-[600px] bg-[#f5f5f5] group flex items-center justify-center overflow-hidden border border-black/5">
+//                             {/* Media Display (Object Contain) */}
+//                             {currentMedia.type === "video" ||
+//                             currentMedia.url.includes(".mp4") ? (
+//                               <video
+//                                 src={currentMedia.url}
+//                                 controls
+//                                 className="w-full h-full object-contain"
+//                               />
+//                             ) : (
+//                               <img
+//                                 src={currentMedia.url}
+//                                 alt="Project Media"
+//                                 className="w-full h-full object-contain"
+//                               />
+//                             )}
+
+//                             {/* Nav Buttons */}
+//                             {mediaList.length > 1 && (
+//                               <>
+//                                 <button
+//                                   onClick={(e) =>
+//                                     prevSlide(e, mediaList.length)
+//                                   }
+//                                   className="absolute left-4 top-1/2 -translate-y-1/2 bg-white text-black w-10 h-10 flex items-center justify-center transition-all hover:scale-110 shadow-lg border border-black/10 rounded-full z-10"
+//                                 >
+//                                   ←
+//                                 </button>
+//                                 <button
+//                                   onClick={(e) =>
+//                                     nextSlide(e, mediaList.length)
+//                                   }
+//                                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-black w-10 h-10 flex items-center justify-center transition-all hover:scale-110 shadow-lg border border-black/10 rounded-full z-10"
+//                                 >
+//                                   →
+//                                 </button>
+//                                 {/* Counter */}
+//                                 <div className="absolute bottom-4 right-4 bg-black text-white text-[10px] px-2 py-1 font-mono uppercase tracking-wider">
+//                                   Img {currentSlide + 1} / {mediaList.length}
+//                                 </div>
+//                               </>
+//                             )}
+//                           </div>
+//                         ) : (
+//                           <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center font-mono text-xs text-gray-400">
+//                             NO MEDIA
+//                           </div>
+//                         )}
+//                       </div>
+
+//                       {/* B. LINKS SECTION (Priority High - Immediately below media) */}
+//                       <div className="flex flex-col gap-2">
+//                         {linksList.map((link, i) => (
+//                           <a
+//                             key={i}
+//                             href={link.url}
+//                             target="_blank"
+//                             rel="noopener noreferrer"
+//                             className="flex justify-between items-center px-4 py-3 border border-black text-xs font-bold uppercase hover:bg-black hover:text-white transition-all group"
+//                           >
+//                             <span>{link.text || "View Project"}</span>
+//                             <span className="group-hover:translate-x-1 transition-transform">
+//                               ↗
+//                             </span>
+//                           </a>
+//                         ))}
+//                         {linksList.length === 0 && (
+//                           <span className="text-xs text-gray-400 italic">
+//                             No External Link.
+//                           </span>
+//                         )}
+//                       </div>
+
+//                       {/* C. INFO & DESCRIPTION */}
+//                       <div className="flex flex-col gap-6">
+//                         {/* Repeated Header Info (Inside) */}
+//                         <div>
+//                           <h2 className="text-3xl md:text-5xl font-medium uppercase tracking-tight mb-2">
+//                             {project.title}
+//                           </h2>
+//                           <div className="flex gap-4 font-mono text-xs text-gray-500 uppercase tracking-widest">
+//                             <span>{project.category}</span>
+//                             <span>/</span>
+//                             <span>{project.year}</span>
+//                           </div>
+//                         </div>
+
+//                         {/* Main Description */}
+//                         <div className="prose prose-lg max-w-none">
+//                           <p className="font-serif text-lg md:text-xl leading-relaxed whitespace-pre-wrap break-words text-gray-800">
+//                             {project.description}
+//                           </p>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               )}
+//             </AnimatePresence>
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// }
+
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// KITA PISAH JADI KOMPONEN KECIL AGAR SETIAP ITEM PUNYA STATE SENDIRI
+// Ini membuat satu project bisa dibuka tanpa menutup project lain (Smooth)
+function ProjectItem({ project, index }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Fallback Media Logic
+  const mediaList =
+    project.media && project.media.length > 0
+      ? project.media
+      : project.image
+      ? [{ url: project.image, type: "image" }]
+      : [];
+
+  const linksList = project.links || [];
+  const currentMedia = mediaList[currentSlide];
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+    // Reset slide ke 0 setiap kali dibuka (opsional, hapus baris ini kalau mau slide terakhir diingat)
+    if (!isOpen) setCurrentSlide(0);
+  };
+
+  const nextSlide = (e) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev === mediaList.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = (e) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev === 0 ? mediaList.length - 1 : prev - 1));
+  };
+
+  return (
+    <div className="border-b border-black/10">
+      {/* 1. HEADER ROW */}
+      <div
+        onClick={toggleOpen}
+        className={`
+            group grid grid-cols-12 py-6 items-baseline cursor-pointer transition-all px-2 select-none
+            ${
+              isOpen
+                ? "bg-gray-50 text-black" // Warna saat aktif
+                : "hover:bg-gray-50" // Warna saat hover belum aktif
+            }
+        `}
+      >
+        <div className="col-span-2 md:col-span-1 font-mono text-xs opacity-50">
+          {isOpen ? "[-]" : `0${index + 1}`}
+        </div>
+        <div className="col-span-8 md:col-span-8 text-xl md:text-5xl font-medium tracking-tight uppercase truncate pr-4">
+          {project.title}
+        </div>
+        <div className="col-span-2 md:col-span-3 text-right font-mono text-xs opacity-50 flex flex-col md:flex-row justify-end gap-2">
+          <span className="hidden md:inline">{project.category}</span>
+          <span className="hidden md:inline">—</span>
+          <span>{project.year}</span>
+        </div>
+      </div>
+
+      {/* 2. EXPANDED CONTENT */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden bg-white"
+          >
+            <div className="p-4 md:p-8 lg:p-12 border-t border-black/5">
+              <div className="max-w-4xl mx-auto flex flex-col gap-8">
+                {/* A. MEDIA CAROUSEL */}
+                <div className="w-full">
+                  {mediaList.length > 0 ? (
+                    <div className="relative w-full aspect-video md:h-[600px] bg-[#f5f5f5] group flex items-center justify-center overflow-hidden border border-black/5">
+                      {/* Media Display */}
+                      {currentMedia.type === "video" ||
+                      currentMedia.url.includes(".mp4") ? (
+                        <video
+                          src={currentMedia.url}
+                          controls
+                          className="w-full h-full object-contain"
+                        />
+                      ) : (
+                        <img
+                          src={currentMedia.url}
+                          alt="Project Media"
+                          className="w-full h-full object-contain"
+                        />
+                      )}
+
+                      {/* Nav Buttons (UPDATED STYLE) */}
+                      {mediaList.length > 1 && (
+                        <>
+                          <button
+                            onClick={prevSlide}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full z-10 
+                            bg-white text-black border border-black 
+                            hover:bg-black hover:text-white hover:border-white 
+                            transition-all shadow-lg"
+                          >
+                            ←
+                          </button>
+                          <button
+                            onClick={nextSlide}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full z-10 
+                            bg-white text-black border border-black 
+                            hover:bg-black hover:text-white hover:border-white 
+                            transition-all shadow-lg"
+                          >
+                            →
+                          </button>
+                          {/* Counter */}
+                          <div className="absolute bottom-4 right-4 bg-black text-white text-[10px] px-2 py-1 font-mono uppercase tracking-wider">
+                            Img {currentSlide + 1} / {mediaList.length}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center font-mono text-xs text-gray-400">
+                      NO MEDIA
+                    </div>
+                  )}
+                </div>
+
+                {/* B. LINKS SECTION */}
+                <div className="flex flex-col gap-2">
+                  {linksList.map((link, i) => (
+                    <a
+                      key={i}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex justify-between items-center px-4 py-3 border border-black text-xs font-bold uppercase hover:bg-black hover:text-white transition-all group"
+                    >
+                      <span>{link.text || "View Project"}</span>
+                      <span className="group-hover:translate-x-1 transition-transform">
+                        ↗
+                      </span>
+                    </a>
+                  ))}
+                  {linksList.length === 0 && (
+                    <span className="text-xs text-gray-400 italic">
+                      No External Link.
+                    </span>
+                  )}
+                </div>
+
+                {/* C. INFO & DESCRIPTION */}
+                <div className="flex flex-col gap-6">
+                  <div>
+                    <h2 className="text-3xl md:text-5xl font-medium uppercase tracking-tight mb-2">
+                      {project.title}
+                    </h2>
+                    <div className="flex gap-4 font-mono text-xs text-gray-500 uppercase tracking-widest">
+                      <span>{project.category}</span>
+                      <span>/</span>
+                      <span>{project.year}</span>
+                    </div>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none">
+                    <p className="font-serif text-lg md:text-xl leading-relaxed whitespace-pre-wrap break-words text-gray-800">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function ProjectsList({ projects }) {
-    const [expandedId, setExpandedId] = useState(null);
-
-    const toggleProject = (id) => {
-        if (expandedId === id) setExpandedId(null);
-        else setExpandedId(id);
-    };
-
-    if (projects.length === 0) {
-        return <div className="py-12 text-center font-mono text-gray-500">NO PROJECTS FOUND IN DATABASE.</div>;
-    }
-
+  if (!projects || projects.length === 0) {
     return (
-        <div className="flex flex-col border-t border-black/10">
-            {projects.map((project) => (
-                <div key={project._id} className="border-b border-black/10">
-                    {/* Clickable Row */}
-                    <div
-                        onClick={() => toggleProject(project._id)}
-                        className="group grid grid-cols-12 py-6 items-baseline cursor-pointer hover:bg-white transition-colors px-2 select-none"
-                    >
-                        {/* Toggle Icon */}
-                        <div className="col-span-2 md:col-span-1 font-mono text-xs text-gray-400 group-hover:text-black">
-                            {expandedId === project._id ? '[-]' : '[+]'}
-                        </div>
-
-                        {/* Project Title */}
-                        <div className="col-span-8 md:col-span-8 text-xl md:text-4xl font-medium tracking-tight uppercase">
-                            {project.title}
-                        </div>
-
-                        {/* Year */}
-                        <div className="col-span-2 md:col-span-3 text-right font-mono text-xs text-gray-400 group-hover:text-black">
-                            {project.year}
-                        </div>
-                    </div>
-
-                    {/* Expanded Content */}
-                    <AnimatePresence>
-                        {expandedId === project._id && (
-                            <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                className="overflow-hidden bg-white"
-                            >
-                                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-4 md:p-8">
-                                    {/* Project Image */}
-                                    <div className="md:col-span-8 relative h-[300px] md:h-[400px] w-full bg-gray-100 border border-black/5">
-                                        <Image
-                                            src={project.image || "https://placehold.co/800x400"}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                                        />
-                                    </div>
-
-                                    {/* Description & Category */}
-                                    <div className="md:col-span-4 flex flex-col justify-between">
-                                        <div>
-                                            <h4 className="font-mono text-xs uppercase mb-2 text-gray-400">Category</h4>
-                                            <p className="font-mono text-sm mb-6 border-b border-black/10 pb-2 inline-block">
-                                                {project.category}
-                                            </p>
-
-                                            <h4 className="font-mono text-xs uppercase mb-4 text-gray-400">Description</h4>
-                                            <p className="font-serif text-lg leading-relaxed whitespace-pre-wrap text-gray-800">
-                                                {project.description}
-                                            </p>
-                                        </div>
-
-                                        <div className="mt-8">
-                                            <button className="px-6 py-3 border border-black text-xs font-bold uppercase hover:bg-black hover:text-white transition-colors w-full md:w-auto">
-                                                View Case Study
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            ))}
-        </div>
+      <div className="py-20 text-center font-mono text-gray-400 border-t border-black/10">
+        NO PROJECTS FOUND.
+      </div>
     );
+  }
+
+  return (
+    <div className="flex flex-col border-t border-black/10">
+      {projects.map((project, index) => (
+        <ProjectItem key={project._id} project={project} index={index} />
+      ))}
+    </div>
+  );
 }

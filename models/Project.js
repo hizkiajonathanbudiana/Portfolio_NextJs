@@ -1,20 +1,36 @@
-// models/Project.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema({
-    // --- FIELD PENTING (INI YANG HILANG SEBELUMNYA) ---
-    type: { type: String, default: 'item' },
+const ProjectSchema = new mongoose.Schema(
+  {
+    type: { type: String, default: "item" },
 
-    // --- Project Fields ---
     title: { type: String },
     slug: { type: String },
     category: { type: String },
     year: { type: String },
-    image: { type: String },
     description: { type: String },
+    image: { type: String }, // Legacy
+
     order: { type: Number, default: 0 },
 
-    // --- Meta/Page Fields ---
+    // FIX: Field 'type' di dalam array harus didefinisikan dengan hati-hati
+    media: [
+      {
+        _id: false,
+        url: { type: String },
+        type: { type: String }, // 'image' or 'video'
+      },
+    ],
+
+    links: [
+      {
+        _id: false,
+        text: { type: String },
+        url: { type: String },
+      },
+    ],
+
+    // Meta Fields
     heading: String,
     subHeading: String,
     metaText: String,
@@ -22,12 +38,19 @@ const ProjectSchema = new mongoose.Schema({
     navPrevText: String,
     navNextLabel: String,
     navNextText: String,
+  },
+  {
+    timestamps: true,
+    strict: false, // Penting biar data masuk walaupun schema belum sempurna
+  }
+);
 
-}, { timestamps: true });
-
-// Delete model lama dari cache biar Next.js reload schema baru
-if (mongoose.models.Project) {
-    delete mongoose.models.Project;
+// HACK UNTUK NEXT.JS:
+// Delete model lama dari cache Mongoose biar schema baru terbaca
+if (mongoose.models && mongoose.models.Project) {
+  delete mongoose.models.Project;
 }
 
-export default mongoose.model('Project', ProjectSchema);
+const Project = mongoose.model("Project", ProjectSchema);
+
+export default Project;
