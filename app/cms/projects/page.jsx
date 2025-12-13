@@ -180,15 +180,13 @@ export default function CMSProjects() {
 
     // Simple Google Drive ID Extractor (Optional helper)
     let finalUrl = urlInput;
-    // Kalau mau auto-convert GDrive link jadi preview link, bisa uncomment logic di bawah ini:
-    /*
+    // Auto-convert GDrive link jadi preview link
     const gdriveRegex = /\/file\/d\/([a-zA-Z0-9_-]+)/;
     const match = finalUrl.match(gdriveRegex);
     if (match && match[1]) {
-       // Convert view link to preview link (often works for img/video tags)
-       finalUrl = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+       // Convert view link to preview link (best for video embedding)
+       finalUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
     }
-    */
 
     setMediaItems((prev) => [...prev, { url: finalUrl, type: urlType }]);
     setUrlInput(""); // Reset input

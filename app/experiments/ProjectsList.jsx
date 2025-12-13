@@ -4,6 +4,28 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
+// Helper to ensure Google Drive links are in preview mode
+const getEmbedUrl = (url) => {
+  if (!url) return "";
+  let id = null;
+
+  // Pattern 1: /file/d/ID
+  const match1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (match1) id = match1[1];
+
+  // Pattern 2: id=ID (e.g. ?id=xxx or &id=xxx)
+  if (!id) {
+    const match2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (match2) id = match2[1];
+  }
+
+  if (id) {
+    return `https://drive.google.com/file/d/${id}/preview`;
+  }
+
+  return url;
+};
+
 // KITA PISAH JADI KOMPONEN KECIL AGAR SETIAP ITEM PUNYA STATE SENDIRI
 // Ini membuat satu project bisa dibuka tanpa menutup project lain (Smooth)
 function ProjectItem({ project, index }) {
@@ -82,16 +104,28 @@ function ProjectItem({ project, index }) {
                     <div className="relative w-full aspect-video md:h-[600px] bg-[#f5f5f5] group flex items-center justify-center overflow-hidden border border-black/5">
                       {/* Media Display */}
                       {currentMedia.type === "video" ||
-                      currentMedia.url.includes(".mp4") ? (
-                        <video
-                          src={currentMedia.url}
-                          controls
-                          className="w-full h-full object-contain"
-                        />
+                      currentMedia.url?.includes(".mp4") ||
+                      currentMedia.url?.includes("drive.google.com") ? (
+                        currentMedia.url?.includes("drive.google.com") ? (
+                          <iframe
+                            src={getEmbedUrl(currentMedia.url)}
+                            className="w-full h-full border-0"
+                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                            referrerPolicy="no-referrer"
+                            title="Project Video"
+                          />
+                        ) : (
+                          <video
+                            src={currentMedia.url}
+                            controls
+                            className="w-full h-full object-contain"
+                          />
+                        )
                       ) : (
                         <Image
                           src={currentMedia.url}
                           alt="Project Media"
+                          fill
                           className="w-full h-full object-contain"
                         />
                       )}
