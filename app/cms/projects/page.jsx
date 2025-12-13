@@ -184,8 +184,8 @@ export default function CMSProjects() {
     const gdriveRegex = /\/file\/d\/([a-zA-Z0-9_-]+)/;
     const match = finalUrl.match(gdriveRegex);
     if (match && match[1]) {
-       // Convert view link to preview link (best for video embedding)
-       finalUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
+      // Convert view link to preview link (best for video embedding)
+      finalUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
     }
 
     setMediaItems((prev) => [...prev, { url: finalUrl, type: urlType }]);
@@ -326,9 +326,8 @@ export default function CMSProjects() {
         <div className="text-right">
           {message && (
             <span
-              className={`block text-xs font-mono font-bold mb-1 ${
-                message.type === "error" ? "text-red-500" : "text-green-500"
-              }`}
+              className={`block text-xs font-mono font-bold mb-1 ${message.type === "error" ? "text-red-500" : "text-green-500"
+                }`}
             >
               {message.text}
             </span>
@@ -517,7 +516,8 @@ export default function CMSProjects() {
                           <Image
                             src={item.url}
                             alt="Preview"
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
                             onError={(e) => {
                               e.target.src =
                                 "https://placehold.co/50x50?text=Err";
@@ -650,8 +650,8 @@ export default function CMSProjects() {
                 {loading
                   ? "SAVING..."
                   : editingId
-                  ? "UPDATE PROJECT"
-                  : "PUBLISH PROJECT"}
+                    ? "UPDATE PROJECT"
+                    : "PUBLISH PROJECT"}
               </button>
             </form>
           </div>
@@ -671,11 +671,10 @@ export default function CMSProjects() {
                 onDragEnter={(e) => handleDragEnter(e, index)}
                 onDragEnd={handleDragEnd}
                 onDragOver={(e) => e.preventDefault()}
-                className={`group relative p-4 bg-[#111] border transition-all cursor-move flex justify-between items-start select-none ${
-                  editingId === p._id
-                    ? "border-green-500 bg-green-900/5"
-                    : "border-[#333] hover:border-gray-500"
-                }`}
+                className={`group relative p-4 bg-[#111] border transition-all cursor-move flex justify-between items-start select-none ${editingId === p._id
+                  ? "border-green-500 bg-green-900/5"
+                  : "border-[#333] hover:border-gray-500"
+                  }`}
               >
                 <div className="absolute left-1 top-1/2 -translate-y-1/2 text-gray-700 opacity-0 group-hover:opacity-100">
                   ⋮⋮
