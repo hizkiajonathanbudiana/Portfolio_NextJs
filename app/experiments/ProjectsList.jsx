@@ -100,7 +100,7 @@ function ProjectItem({ project, index }) {
                                 {/* A. MEDIA CAROUSEL */}
                                 <div className="w-full">
                                     {mediaList.length > 0 ? (
-                                        <div className="relative w-full aspect-video md:h-[600px] bg-[#f5f5f5] group flex items-center justify-center overflow-hidden border border-black/5">
+                                        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[600px] bg-[#f5f5f5] group flex items-center justify-center overflow-hidden border border-black/5">
                                             {/* Media Display */}
                                             {currentMedia.type === "video" ||
                                                 currentMedia.url?.includes(".mp4") ||
